@@ -1,59 +1,93 @@
 # 🔐 Web Python Django - Login To MainPage
 
-A simple web application built with **Python Django** and **IBM DB2 (AS400)** for user authentication.
+<div align="center">
+
+<img width="1888" height="977" alt="image" src="https://github.com/user-attachments/assets/db471a25-e565-40bd-86a4-643faa296ba0" />
+
+### 🚀 Simple Authentication System using Django & IBM DB2
+
+Authenticate users from IBM DB2 (AS400) and redirect them to a secured MainPage using Django Sessions.
+
+</div>
 
 ---
 
-## 📖 Overview
+## 📸 Preview
 
-This project demonstrates a basic authentication flow:
+### 🔑 Login Page
 
 ```text
-Login Page
-     │
-     ▼
-Validate USERID / PASSWD
-     │
-     ▼
- IBM DB2 (KVXA.XAA0300)
-     │
-     ▼
- MainPage
++--------------------------------+
+|           LOGIN               |
++--------------------------------+
+| USERID                         |
+| PASSWORD                       |
+|                                |
+|      [ LOGIN ]                 |
++--------------------------------+
 ```
 
-The application connects to an IBM DB2 database through ODBC and validates user credentials stored in the `KVXA.XAA0300` table.
-
----
-
-## ✨ Features
-
-* 🔐 User Login Authentication
-* 🗄️ IBM DB2 Database Integration
-* 🚪 Session-based Authentication
-* 🏠 MainPage after Login
-* 🔓 Logout Function
-* 🐍 Python Django Framework
-* 🔌 ODBC Database Connection
-
----
-
-## 🛠️ Technologies
-
-| Technology  | Version           |
-| ----------- | ----------------- |
-| Python      | 3.x               |
-| Django      | 5.x               |
-| IBM DB2     | AS400             |
-| ODBC Driver | IBM i Access ODBC |
-| HTML        | HTML5             |
-| CSS         | CSS3              |
-
----
-
-## 📂 Project Structure
+### 🏠 MainPage
 
 ```text
-LoginToMainPage_Python/
++--------------------------------+
+| Welcome User                   |
+|                                |
+| Logged in as: USERID           |
+|                                |
+|      [ LOGOUT ]                |
++--------------------------------+
+```
+
+---
+
+# ✨ Features
+
+* 🔐 User Authentication
+* 🗄️ IBM DB2 Integration
+* 🔌 ODBC Database Connection
+* 👤 Session Management
+* 🚪 Logout Function
+* 🎨 Customizable UI
+* ⚡ Fast & Lightweight
+* 🐍 Django Framework
+
+---
+
+# 🏗️ Architecture
+
+```text
+┌─────────────┐
+│ Login Page  │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  views.py   │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│   db2.py    │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│ KVXA.XAA0300│
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  MainPage   │
+└─────────────┘
+```
+
+---
+
+# 📂 Project Structure
+
+```text
+Web-Python-Django_Demo_LoginToMainPage
 │
 ├── manage.py
 │
@@ -77,15 +111,32 @@ LoginToMainPage_Python/
 │           └── mainpage.html
 │
 ├── requirements.txt
-│
 └── README.md
 ```
 
 ---
 
-## 🗄️ Database Configuration
+# 🛠️ Technology Stack
 
-Edit `config/settings.py`
+| Technology | Description       |
+| ---------- | ----------------- |
+| Python     | Backend Language  |
+| Django     | Web Framework     |
+| IBM DB2    | Database          |
+| ODBC       | Database Driver   |
+| HTML5      | Frontend          |
+| CSS3       | Styling           |
+| JavaScript | Client-side Logic |
+
+---
+
+# ⚙️ Database Configuration
+
+Edit:
+
+```python
+config/settings.py
+```
 
 ```python
 DB2_ODBC = {
@@ -97,13 +148,13 @@ DB2_ODBC = {
 
 ---
 
-## 📋 Database Table
+# 🗄️ Database Table
 
 ```sql
 KVXA.XAA0300
 ```
 
-Required columns:
+Required fields:
 
 ```sql
 USERID
@@ -113,42 +164,48 @@ PASSWD
 Example:
 
 ```sql
-SELECT USERID, PASSWD
+SELECT USERID,
+       PASSWD
 FROM KVXA.XAA0300
 ```
 
 ---
 
-## ⚙️ Installation
+# 🚀 Installation
 
-### Clone Repository
+## Clone Repository
 
 ```bash
 git clone https://github.com/ngtrkhnguyen/Web-Python-Django_Demo_LoginToMainPage.git
+```
+
+```bash
 cd Web-Python-Django_Demo_LoginToMainPage
 ```
 
-### Create Virtual Environment
+---
+
+## Create Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-### Activate Environment
-
-#### Windows
+### Windows
 
 ```bash
 venv\Scripts\activate
 ```
 
-#### Linux / MacOS
+### Linux / MacOS
 
 ```bash
 source venv/bin/activate
 ```
 
-### Install Dependencies
+---
+
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -156,21 +213,21 @@ pip install -r requirements.txt
 
 ---
 
-## 🚀 Run Application
-
-Apply migrations:
+## Apply Migration
 
 ```bash
 python manage.py migrate
 ```
 
-Start development server:
+---
+
+## Run Server
 
 ```bash
 python manage.py runserver
 ```
 
-Open browser:
+Open:
 
 ```text
 http://127.0.0.1:8000
@@ -178,67 +235,66 @@ http://127.0.0.1:8000
 
 ---
 
-## 🔄 Authentication Flow
+# 🔄 Authentication Flow
 
-```text
-User Login
-     │
-     ▼
-login.html
-     │
-     ▼
-views.py
-     │
-     ▼
-db2.py
-     │
-     ▼
-KVXA.XAA0300
-     │
-     ▼
-Session Created
-     │
-     ▼
-MainPage
+```mermaid
+flowchart TD
+
+A[Login Page]
+--> B[Enter USERID / PASSWD]
+--> C[views.py]
+--> D[db2.py]
+--> E[KVXA.XAA0300]
+
+E -->|Valid| F[Create Session]
+F --> G[MainPage]
+
+E -->|Invalid| H[Show Error]
 ```
 
 ---
 
-## 📸 Screenshots
+# 🔒 Security
 
-### Login Page
-
-```text
-USERID
-PASSWORD
-
-[ LOGIN ]
-```
-
-### Main Page
-
-```text
-Welcome
-
-Logged in as:
-USERID
-
-[ Logout ]
-```
+* Session-based Authentication
+* CSRF Protection
+* Database Parameter Binding
+* SQL Injection Prevention
+* Secure Django Middleware
 
 ---
 
-## 🔒 Security Notes
+# 📋 Future Improvements
 
-* Store passwords using hash algorithms in production.
-* Never expose database credentials publicly.
-* Use environment variables for sensitive information.
-* Configure HTTPS when deploying.
+* [ ] Password Hashing
+* [ ] User Roles
+* [ ] Dashboard UI
+* [ ] Bootstrap 5 Integration
+* [ ] User Profile Page
+* [ ] Password Reset
+* [ ] Activity Logging
+* [ ] REST API
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
-**Nguyen Truong Khoi Nguyen**
+### Nguyen Truong Khoi Nguyen
 
-Developed with Python Django and IBM DB2.
+**IT Developer**
+
+* Python Django
+* IBM DB2
+* NodeJS
+* SQL Server
+* Oracle Database
+
+---
+
+<div align="center">
+
+### ⭐ If you like this project, give it a star!
+
+© 2026 Nguyen Truong Khoi Nguyen. All Rights Reserved.
+
+</div>
